@@ -1,20 +1,10 @@
+import { TodolistType } from './types';
+
 import { getRandomInt, isEvenNumber } from 'utils';
 
 const todolistsCount = 8;
 const maxTasksCount = 4;
 
-type TaskType = {
-  id: string;
-  todolistId: string;
-  date: Date;
-  status: 'completed' | 'active';
-  name: string;
-  description: string;
-};
-
-type TodolistType = {
-  [key: string]: TaskType[];
-};
 export const TodolistsData = (): TodolistType => {
   const todolists: TodolistType = {};
 
