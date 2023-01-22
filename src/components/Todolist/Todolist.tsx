@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { FC } from 'react';
+import { FC, Fragment, useState } from 'react';
 
 import ExpandCircleDownRoundedIcon from '@mui/icons-material/ExpandCircleDownRounded';
 import Accordion from '@mui/material/Accordion';
@@ -10,18 +10,28 @@ import Typography from '@mui/material/Typography';
 import { TodolistCard } from './style';
 
 import { CustomCard } from 'components/CustomCard/CustomCard';
+import { CustomCheckbox } from 'components/CustomCheckbox/CustomCheckbox';
+import { Task } from 'components/Task/Task';
 import { TaskType } from 'data/types';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
 type TodolistPropsType = {
   tasks: TaskType[];
   todolistDate: string;
+  isOpen: boolean;
 };
 
 export const Todolist: FC<TodolistPropsType> = ({
   tasks,
   todolistDate,
+  isOpen,
 }): ReturnComponentType => {
+  const [isOpenTodolist, setIsOpenTodolist] = useState(isOpen);
+
+  const onToggleShowModeClick = (): void => {
+    setIsOpenTodolist(state => !state);
+  };
+
   const formattedDate = (): string => {
     const options = { day: 'numeric', month: 'numeric' } as const;
     const currentDate = new Date().toLocaleDateString('en-GB', options);
@@ -43,19 +53,31 @@ export const Todolist: FC<TodolistPropsType> = ({
   };
 
   return (
-    <TodolistCard>
-      <AccordionSummary
-        expandIcon={<ExpandCircleDownRoundedIcon color="primary" />}
-        /*  aria-controls="panel1a-content"
-        id="panel1a-header" */
-      >
-        <CustomCard
-          sideColor="#A9A9A9"
-          title={`${formattedDate()} Tasks`}
-          subtitle="dgdf dfgdf dgdfg dfjhkh jhhjkhk khjkhkjk kjhjhjkh jhjgkjgkj"
+    <Fragment>
+      {isOpenTodolist && (
+        <CustomCheckbox
+          onCheckboxClick={onToggleShowModeClick}
+          isChecked={isOpenTodolist}
+          label={`${formattedDate()} Tasks`}
         />
-      </AccordionSummary>
-      <AccordionDetails></AccordionDetails>
-    </TodolistCard>
+      )}
+      <TodolistCard expanded={isOpenTodolist}>
+        {!isOpenTodolist && (
+          <AccordionSummary
+            onClick={onToggleShowModeClick}
+            expandIcon={<ExpandCircleDownRoundedIcon color="primary" />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <CustomCard sideColor="#A9A9A9" title={`${formattedDate()} Tasks`} />
+          </AccordionSummary>
+        )}
+        <AccordionDetails>
+          {tasks.map(task => (
+            <Task key={task.id} {...task} />
+          ))}
+        </AccordionDetails>
+      </TodolistCard>
+    </Fragment>
   );
 };

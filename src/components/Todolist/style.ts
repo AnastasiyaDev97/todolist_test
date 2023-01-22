@@ -8,11 +8,15 @@ export const TodolistCard = styled(Accordion)(() => ({
   boxShadow:
     '16px 16px 20px rgba(0, 0, 0, 0.15), -8px -8px 20px rgba(255, 255, 255, 0.05)',
   color: 'inherit',
+  padding: '16px 0',
   '&:before': { display: 'none' },
-  '& .MuiAccordionSummary-root': { padding: '0 25px 0 0' },
+  '& .MuiAccordionSummary-root': { padding: '0 25px 0 0', minHeight: 0 },
   '& .MuiAccordionSummary-content': {
-    margin: '16px 0',
+    margin: '0',
     overflow: 'hidden',
+    padding: '0 8px 0 33px',
+  },
+  '& .MuiAccordionDetails-root': {
     padding: '0 8px 0 33px',
   },
 }));

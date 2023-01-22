@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { FC } from 'react';
 
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -6,18 +6,25 @@ import FormGroup from '@mui/material/FormGroup';
 
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
-export const CustomCheckbox = (): ReturnComponentType => {
-  const [checked, setChecked] = useState(true);
+type CustomCheckboxPropsType = {
+  onCheckboxClick: () => void;
+  isChecked: boolean;
+  label: string;
+};
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    setChecked(event.target.checked);
-  };
-
+export const CustomCheckbox: FC<CustomCheckboxPropsType> = ({
+  onCheckboxClick,
+  isChecked,
+  label,
+}): ReturnComponentType => {
   return (
     <FormGroup>
       <FormControlLabel
-        control={<Checkbox checked={checked} onChange={handleChange} color="primary" />}
-        label="Today Tasks:"
+        sx={{ pl: '16px' }}
+        control={
+          <Checkbox checked={isChecked} onChange={onCheckboxClick} color="primary" />
+        }
+        label={label}
       />
     </FormGroup>
   );

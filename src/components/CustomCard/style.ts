@@ -21,15 +21,19 @@ export const CardContainer = styled(Card)({
   width: '100%',
   boxShadow: 'none',
   color: 'inherit',
+  display: 'flex',
+  justifyContent: 'space-between',
+  '&:not(:last-of-type)': { marginBottom: '16px' },
 });
 
-export const Header = styled(CardHeader)({
+export const Header = styled(CardHeader)((props: { crossed: boolean }) => ({
   padding: 0,
   '.MuiCardHeader-title': {
     fontWeight: 600,
     fontSize: '24px',
     lineHeight: '28px',
     overflow: 'hidden',
+    textDecoration: props.crossed ? 'line-through' : 'none',
   },
   '.MuiCardHeader-subheader': {
     color: 'rgba(255, 255, 255, 0.6)',
@@ -43,4 +47,4 @@ export const Header = styled(CardHeader)({
   '.MuiCardHeader-content': {
     width: '100%',
   },
-});
+}));
