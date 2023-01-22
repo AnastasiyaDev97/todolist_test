@@ -1,3 +1,6 @@
+GithubPages (для того чтобы получить новость со стороннего api необходимо запустить проект): https://nastyaz23.github.io/todolist_test/
+
+
 ## Launch of the project ⏯
 
 <br/>
