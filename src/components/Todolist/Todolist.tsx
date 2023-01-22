@@ -1,4 +1,4 @@
-import { FC, Fragment, useContext } from 'react';
+import { FC, Fragment, useContext, useCallback } from 'react';
 
 import ExpandCircleDownRoundedIcon from '@mui/icons-material/ExpandCircleDownRounded';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -6,10 +6,10 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 
 import { TodolistCard } from './style';
 
-import { CustomCard } from 'components/CustomCard/CustomCard';
-import { CustomCheckbox } from 'components/CustomCheckbox/CustomCheckbox';
-import { StoreContext } from 'components/Provider/Provider';
-import { Task } from 'components/Task/Task';
+import { CustomCard } from 'components/CustomCard';
+import { CustomCheckbox } from 'components/CustomCheckbox';
+import { StoreContext } from 'components/Provider';
+import { Task } from 'components/Task';
 import { TaskType } from 'data/types';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
@@ -26,11 +26,11 @@ export const Todolist: FC<TodolistPropsType> = ({
 }): ReturnComponentType => {
   const todolistData = useContext(StoreContext);
 
-  const onToggleShowModeClick = (): void => {
+  const onToggleShowModeClick = useCallback((): void => {
     if (todolistData) {
       todolistData.methods.onEditTodolistModeClick(todolistDate, !isOpen);
     }
-  };
+  }, [todolistData, isOpen, todolistDate]);
 
   const formattedDate = (): string => {
     const options = { day: 'numeric', month: 'numeric' } as const;

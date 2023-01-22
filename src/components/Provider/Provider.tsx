@@ -1,6 +1,6 @@
 import { createContext, FC, ReactNode } from 'react';
 
-import { TodolistStoreDataType } from 'hooks/useGetTodolistsData/useGetTodolistsData';
+import { TodolistStoreDataType } from 'hooks/useGetTodolistsData';
 import { Nullable } from 'types/Nullable';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 

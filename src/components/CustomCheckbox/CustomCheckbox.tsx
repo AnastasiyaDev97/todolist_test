@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { memo } from 'react';
 
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -12,20 +12,22 @@ type CustomCheckboxPropsType = {
   label: string;
 };
 
-export const CustomCheckbox: FC<CustomCheckboxPropsType> = ({
-  onCheckboxClick,
-  isChecked,
-  label,
-}): ReturnComponentType => {
-  return (
-    <FormGroup>
-      <FormControlLabel
-        sx={{ pl: '16px' }}
-        control={
-          <Checkbox checked={isChecked} onChange={onCheckboxClick} color="primary" />
-        }
-        label={label}
-      />
-    </FormGroup>
-  );
-};
+export const CustomCheckbox = memo(
+  ({
+    onCheckboxClick,
+    isChecked,
+    label,
+  }: CustomCheckboxPropsType): ReturnComponentType => {
+    return (
+      <FormGroup>
+        <FormControlLabel
+          sx={{ pl: '16px' }}
+          control={
+            <Checkbox checked={isChecked} onChange={onCheckboxClick} color="primary" />
+          }
+          label={label}
+        />
+      </FormGroup>
+    );
+  },
+);

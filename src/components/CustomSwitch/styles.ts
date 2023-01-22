@@ -1,4 +1,5 @@
 /* eslint-disable no-magic-numbers */
+import FormLabel from '@mui/material/FormLabel';
 import { styled } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
 
@@ -70,4 +71,8 @@ export const IOSSwitch = styled(Switch)(({ theme }) => ({
       duration: 500,
     }),
   },
+}));
+
+export const SwitchLabel = styled(FormLabel)(({ theme }) => ({
+  color: theme.palette.primary.main,
 }));

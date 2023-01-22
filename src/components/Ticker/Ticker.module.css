@@ -1,0 +1,16 @@
+.ticker {
+  animation: text 5s infinite linear;
+  white-space: nowrap;
+  padding-left: 100%;
+  padding: 15px 0 15px 100%;
+}
+
+@keyframes text {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  100% {
+    transform: translate(-160%, 0);
+  }
+}
