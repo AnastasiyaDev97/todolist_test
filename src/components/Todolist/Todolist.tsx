@@ -1,16 +1,14 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { FC, Fragment, useState } from 'react';
+import { FC, Fragment, useContext } from 'react';
 
 import ExpandCircleDownRoundedIcon from '@mui/icons-material/ExpandCircleDownRounded';
-import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
-import Typography from '@mui/material/Typography';
 
 import { TodolistCard } from './style';
 
 import { CustomCard } from 'components/CustomCard/CustomCard';
 import { CustomCheckbox } from 'components/CustomCheckbox/CustomCheckbox';
+import { StoreContext } from 'components/Provider/Provider';
 import { Task } from 'components/Task/Task';
 import { TaskType } from 'data/types';
 import { ReturnComponentType } from 'types/ReturnComponentType';
@@ -26,10 +24,12 @@ export const Todolist: FC<TodolistPropsType> = ({
   todolistDate,
   isOpen,
 }): ReturnComponentType => {
-  const [isOpenTodolist, setIsOpenTodolist] = useState(isOpen);
+  const todolistData = useContext(StoreContext);
 
   const onToggleShowModeClick = (): void => {
-    setIsOpenTodolist(state => !state);
+    if (todolistData) {
+      todolistData.methods.onEditTodolistModeClick(todolistDate, !isOpen);
+    }
   };
 
   const formattedDate = (): string => {
@@ -54,15 +54,15 @@ export const Todolist: FC<TodolistPropsType> = ({
 
   return (
     <Fragment>
-      {isOpenTodolist && (
+      {isOpen && (
         <CustomCheckbox
           onCheckboxClick={onToggleShowModeClick}
-          isChecked={isOpenTodolist}
+          isChecked={isOpen}
           label={`${formattedDate()} Tasks`}
         />
       )}
-      <TodolistCard expanded={isOpenTodolist}>
-        {!isOpenTodolist && (
+      <TodolistCard expanded={isOpen}>
+        {!isOpen && (
           <AccordionSummary
             onClick={onToggleShowModeClick}
             expandIcon={<ExpandCircleDownRoundedIcon color="primary" />}

@@ -26,7 +26,7 @@ export const CardContainer = styled(Card)({
   '&:not(:last-of-type)': { marginBottom: '16px' },
 });
 
-export const Header = styled(CardHeader)((props: { crossed: boolean }) => ({
+export const Header = styled(CardHeader)((props: { crossed?: string }) => ({
   padding: 0,
   '.MuiCardHeader-title': {
     fontWeight: 600,

@@ -24,7 +24,11 @@ export const CustomCard: FC<CardPropsType> = ({
   return (
     <CardContainer>
       {sideColor && <CardSide sideColor={sideColor} />}
-      <Header title={title} subheader={subtitle} crossed={status === 'completed'} />
+      <Header
+        title={title}
+        subheader={subtitle}
+        crossed={status === 'completed' ? 'true' : undefined}
+      />
       {children && <CardActions sx={{ p: 0 }}>{children}</CardActions>}
     </CardContainer>
   );

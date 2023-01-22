@@ -1,13 +1,13 @@
 import { createContext, FC, ReactNode } from 'react';
 
-import { TodolistType } from 'data/types';
+import { TodolistStoreDataType } from 'hooks/useGetTodolistsData/useGetTodolistsData';
 import { Nullable } from 'types/Nullable';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
-const StoreContext = createContext<Nullable<TodolistType>>(null);
+export const StoreContext = createContext<Nullable<TodolistStoreDataType>>(null);
 
 type ProviderPropsType = {
-  value: Nullable<TodolistType>;
+  value: Nullable<TodolistStoreDataType>;
   children: ReactNode;
 };
 

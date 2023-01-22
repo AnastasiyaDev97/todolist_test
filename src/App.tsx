@@ -6,22 +6,22 @@ import { Layout } from './components/Layout/Layout';
 import { Header } from 'components/Header/Header';
 import { Provider } from 'components/Provider/Provider';
 import { Todolist } from 'components/Todolist/Todolist';
-import { TodolistsData } from 'data/todolists';
+import { useGetTodolistsData } from 'hooks/useGetTodolistsData/useGetTodolistsData';
 import { theme } from 'theme';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
 const App = (): ReturnComponentType => {
-  const todolists = TodolistsData();
+  const todolistDataStore = useGetTodolistsData();
 
   return (
     <ThemeProvider theme={theme}>
-      <Provider value={todolists}>
+      <Provider value={todolistDataStore}>
         <Layout>
-          <Container sx={{ p: '0 12px' }}>
+          <Container sx={{ p: '0 12px 12px 12px' }}>
             <>
               <Header />
 
-              {Object.entries(todolists).map(todolist => {
+              {Object.entries(todolistDataStore.todolists).map(todolist => {
                 const todolistDate = todolist[0];
                 const { tasks, isOpen } = todolist[1];
 
